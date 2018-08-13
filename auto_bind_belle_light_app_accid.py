@@ -60,8 +60,14 @@ def update_status(app_info):
 
 def bind_im(app_list):
     for one in app_list:
-        response = requests.post(BELLE_HOST + '/api/im_service/light_app/add_light_app_bind', data=one)
+        print "-------------------bind im "
+        print json.dumps(one)
+        api_host = BELLE_HOST + '/api/im_service/light_app/add_light_app_bind'
+        print "api: %s" % api_host
+        response = requests.post(api_host, data=one)
         result = response.json()
+        print "-------------------result"
+        print result
         if result.get("error_code", -1) == 0:
             update_status(one)
         time.sleep(0.1)
